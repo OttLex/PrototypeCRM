@@ -1,0 +1,122 @@
+﻿<Window x:Class="PrototypeCRM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototypeCRM" 
+        xmlns:localVM="clr-namespace:PrototypeCRM.ViewModels" 
+        xmlns:localDB="clr-namespace:PrototypeCRM.DataAccess"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <localVM:MainViewModel/>
+    </Window.DataContext>
+
+    <TabControl SelectionChanged="TabControl_SelectionChanged">
+
+        <TabItem x:Name="catalogTab">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Height="10" Width="10" Fill="Black" />
+                    <TextBlock Margin="3">Каталог товаров</TextBlock>
+                </StackPanel>
+            </TabItem.Header>
+            <TabItem.Content>
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <RowDefinition Height="0.8*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                   Grid.Row="0"                   
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   >Товары
+                        </Label>
+
+                        <ListBox Grid.Column="0"
+                     Grid.Row="1"
+                     Height="350"
+                     ItemsSource="{Binding Products}"
+                     SelectedItem="{Binding SelectedProduct}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="5">
+                                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                                        <TextBlock Text="{Binding Path=Price}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Grid.Row="1" VerticalAlignment="Top" 
+                Grid.Column="1">
+
+                            <StackPanel 
+                 DataContext="{Binding SelectedProduct}">
+                                <TextBlock Text="Выбранный элемент"  />
+                                <TextBlock Text="Модель" />
+                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Text="Цена" />
+                                <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel 
+                Grid.Row="1" VerticalAlignment="Top" 
+                Grid.Column="1" DataContext="{Binding Client}">
+                                <TextBlock Text="Клиент"/>
+                                <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel 
+                Grid.Row="1" VerticalAlignment="Top" 
+                Grid.Column="1" DataContext="{Binding Employer}">
+                                <TextBlock Text="Сотрудник"/>
+                                <TextBox Text="{Binding Path= Name, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <Button Content="Добавить" Height="20" Width="60" HorizontalAlignment="Left" 
+                                    VerticalAlignment="Bottom" Margin="10" 
+                                    Command="{Binding AddCommand}" ></Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+
+
+        <TabItem x:Name="salesTab">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Height="10" Width="10" Fill="Black" />
+                    <TextBlock Margin="3">Продажи</TextBlock>
+                </StackPanel>
+            </TabItem.Header>
+            <TabItem.Content>
+                <ListBox x:Name="SalesList" Grid.Column="0"
+                     Grid.Row="1"
+                     Height="350"
+                     ItemsSource="{Binding Sales}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock FontSize="18" Text="{Binding Path=Product.Name}" />
+                                <TextBlock Text="{Binding Path=Client.Name}" />
+                                <TextBlock Text="{Binding Path=Employer.Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem.Content>
+        </TabItem>
+    </TabControl>
+
+</Window>
