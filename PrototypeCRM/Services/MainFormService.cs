@@ -64,6 +64,7 @@ namespace PrototypeCRM.Services
         public MainFormService()
         {
             _db = new AppDbContext();
+            _db.Database.EnsureDeleted();
             _db.Database.EnsureCreated();
             InitRepositories();
 
@@ -81,11 +82,11 @@ namespace PrototypeCRM.Services
         }
 
 
-        public void AddProductToSale(Sale sale)
+        public ObservableCollection<Sale> AddProductToSale(Sale sale)
         {
 
             _saleRepo.Create(sale);
-            _saleCollection = new ObservableCollection<Sale>(_saleRepo.GetListObjects());
+            return _saleCollection = new ObservableCollection<Sale>(_saleRepo.GetListObjects());
         }
        
 

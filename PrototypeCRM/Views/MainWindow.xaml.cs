@@ -25,14 +25,5 @@ namespace PrototypeCRM
         {
             InitializeComponent();
         }
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (salesTab.IsSelected)
-            {
-                AppDbContext db = new AppDbContext();
-                SalesList.DataContext = db.Sales.ToList();
-            }
-        }
     }
 }

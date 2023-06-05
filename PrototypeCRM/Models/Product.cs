@@ -17,7 +17,7 @@ namespace PrototypeCRM.Models
         [Required]
         public int Price { get; set; }
 
-        public List<Sale> Sales { get; set; }
+        public ICollection<Sale> Sales { get; set; }
 
     }
 }

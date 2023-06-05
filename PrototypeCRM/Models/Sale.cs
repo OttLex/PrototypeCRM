@@ -13,15 +13,15 @@ namespace PrototypeCRM.Models
         [Key]
         public int Id { get; set; }
 
-        public int? ProductId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public Product Product { get; set; }
 
-        public int? ClientId { get; set; }
+        public int ClientId { get; set; }
         [Required]
         public Client Client { get; set; }
 
-        public int? EmployerId { get; set; }
+        public int EmployerId { get; set; }
         [Required]
         public Employer Employer{ get; set; }
     }

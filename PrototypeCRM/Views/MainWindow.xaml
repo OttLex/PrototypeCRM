@@ -13,7 +13,7 @@
         <localVM:MainViewModel/>
     </Window.DataContext>
 
-    <TabControl SelectionChanged="TabControl_SelectionChanged">
+    <TabControl>
 
         <TabItem x:Name="catalogTab">
             <TabItem.Header>

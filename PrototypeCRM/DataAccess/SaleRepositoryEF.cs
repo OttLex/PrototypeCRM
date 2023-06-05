@@ -12,11 +12,11 @@ namespace PrototypeCRM.DataAccess
         AppDbContext db= new AppDbContext();
         public void Create(Sale obj)
         {
-            db.Products.Remove(obj.Product);
-            db.Employers.Remove(obj.Employer);
-            db.Clients.Remove(obj.Client);
-            db.SaveChanges();
-            db.Add(obj);
+            //db.Products.Remove(obj.Product);
+            //db.Employers.Remove(obj.Employer);
+            //db.Clients.Remove(obj.Client);
+            //db.SaveChanges();
+            db.Attach(obj);
             db.SaveChanges();
         }
 

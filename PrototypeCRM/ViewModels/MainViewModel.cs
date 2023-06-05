@@ -24,7 +24,15 @@ namespace PrototypeCRM.ViewModels
             }
         }
 
-        public ObservableCollection<Sale> Sales => _mainService.SaleCollection;
+        ObservableCollection<Sale> _sales;
+        public ObservableCollection<Sale> Sales 
+        { get { return _sales; }
+            set
+            {
+                _sales = value;
+                OnPropertyChanged(nameof(Sales));
+            }
+        }
 
         public ObservableCollection<Product> Products => _mainService.ProductCollection;
 
@@ -53,7 +61,7 @@ namespace PrototypeCRM.ViewModels
                         sale.Client = Client;
                         sale.Employer = Employer;
 
-                        _mainService.AddProductToSale(sale);
+                        Sales= _mainService.AddProductToSale(sale);
                     }));
             }
         }
